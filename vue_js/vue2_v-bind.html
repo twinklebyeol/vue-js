@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello, World!</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <style>
+      .blue_style {
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!--🔴 v-bind 안에서도 자바스크립트 사용 가능하므로 변수와 문장을 연결하여 클래스 이름을 완성하여 연결-->
+      <h1 v-bind:class="sColorName + '_style'">안녕하세요!</h1>
+      <!--🔴 input에 v-bind 생략하고 (:)으로만 사용가능 -->
+      <input :value="sDate" />
+    </div>
+
+    <script>
+      // vue 객체를 생성 꼭❗❗❗❗❗ 생성❗❗❗❗하여 앱을 초기화하고 시작함 /  🔥똑같은 객체를 두개 생성하면 작동을 안함 el로 서로 다른 아이디를 생성해주기🔥
+      var gDate_app = new Vue({
+        el: "#app",
+        data: {
+          sDate: "올해년도:" + new Date().getFullYear(),
+          sColorName: "blue",
+        },
+      });
+    </script>
+  </body>
+</html>

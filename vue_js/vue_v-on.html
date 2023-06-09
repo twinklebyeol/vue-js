@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{sTitle}}</h1>
+      <!-- 버튼을 누르면 fnChangeTitle 메소드로 이벤트 핸들러 수행 -->
+      <button v-on:click="fnChangeTitle">Click</button>
+    </div>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          sTitle: "안녕하세요!",
+        },
+
+        methods: {
+          fnChangeTitle() {
+            // this :Vue 객체의 인스턴스 지금 스크립트에 들어있는 누구누구를 의미함
+            this.sTitle = "Hello!";
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

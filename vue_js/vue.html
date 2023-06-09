@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello, World!</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <style>
+      p {
+        background-color: orangered;
+        width: 500px;
+        font-size: x-large;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- sTitle 값을 받아서 HTML의 엘리먼트 값으로 변환하여 표시함 -->
+      <p>
+        {{sTitle}}<br />
+        {{sContent}}<br />
+        {{sTitle2}}<br />
+        {{sContent2}}
+      </p>
+    </div>
+    <div id="app2">
+      <p>
+        {{sTitle3}}<br />
+        {{sContent3}}
+      </p>
+    </div>
+
+    <script>
+      // vue 객체를 생성 꼭❗❗❗❗❗ 생성❗❗❗❗하여 앱을 초기화하고 시작함 /  🔥똑같은 객체를 두개 생성하면 작동을 안함 el로 서로 다른 아이디를 생성해주기🔥
+      new Vue({
+        // 🔴 id 속성값이 "app" 인 div 엘리먼트(el)와 앱을 연결시켜주는 구동
+        // 🔴 document.querySelector('#app')
+        el: "#app",
+        // 🔴 {{sTitle}}로 데이터 값을 전달함 / 🔴여러개를 묶어줄수있고 묶어주는게 중괄호{} / 🔴date❗❗❗❗는 단순한 데이터를 전달할때 사용❗❗❗❗
+        data: {
+          sTitle: "Hello, Michele!",
+          sContent: "깡초워웡!!!!",
+          sTitle2: "오늘 점심은",
+          sContent2: "가정식백반으로~~~~",
+        },
+      });
+
+      new Vue({
+        el: "#app2",
+        data: {
+          sTitle3: "깡깡깡",
+          sContent3: "총총총",
+        },
+      });
+    </script>
+  </body>
+</html>

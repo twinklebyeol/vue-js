@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello, World!</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <style>
+      body,
+      input {
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <p>{{sMsg}}</p>
+      <!--🔴 v-model 은 데이터에 접근해서 가져오는 것과 동시에 입력이 동기화 됨 -->
+      <!--🔴 엘리먼트의 어트리뷰트는 'v-model:'다음에 명시 -->
+      <input v-model:value="sMsg" />
+      <!-- 🔴자바크스립트 버전 -->
+      <!-- 🔴<input type="text" id="txt_box" onkeyup="=printTxt()" /> -->
+    </div>
+
+    <script>
+      var main = new Vue({
+        el: "#app",
+        data: {
+          sMsg: "안녕하세요",
+        },
+      });
+      // 🔴자바스크립트 버전
+      //   function printTxt() {
+      //     var rst = document.getElementById("rst");
+      //     var txt_box = document.getElementById("txt_box");
+      //     var rtn_txt = txt_box.value;
+      //     rst.textContent = rtn_txt;
+      //   }
+      //
+    </script>
+  </body>
+</html>

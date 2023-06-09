@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <style>
+      li {
+        color: blueviolet;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h1>좋아하는 과일</h1>
+      <ol>
+        <!-- 🔴 반복문으로 fruits 과일 배열 데이터를 가져옴 -->
+        <li v-for="item in fruits">
+          <!--🔴  fruits 안에 fruitsName 항목을 하나씩 가져와 html로 렌더링 -->
+          {{item.fruitName}}{{item.price}}
+        </li>
+      </ol>
+    </div>
+
+    <script>
+      new Vue({
+        el: "#app",
+        // 🔴 과일의 이름들을 가진 fruits 배열을 데이터로 정의함
+        data: {
+          fruits: [
+            { fruitName: "사과", price: 1000 },
+            { fruitName: "배", price: 1000 },
+            { fruitName: "포도", price: 1000 },
+            { fruitName: "수박", price: 1000 },
+          ],
+        },
+      });
+    </script>
+  </body>
+</html>
