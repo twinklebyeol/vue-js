@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>반응형 Grid</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css">
+    <style>
+        .box1{background:teal;color:white}
+        .box2{background:tomato;color:white}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <v-app>
+            <!-- 앱바를 이용하여 헤더 제목 작성 -->
+            <v-app-bar app flat color="primary">
+                <v-toolbar-title class="white--text mx-auto">
+                    화면 크기에 따른 레이아웃 변경
+                </v-toolbar-title>
+            </v-app-bar>
+
+            <v-main>
+                <v-container>
+                    <v-row>
+                        <v-col cols="12" sm="6" class="box1">
+                            <h2 class="mb-3">Content 1</h2>
+                            <p>첫 번째 영역</p>
+                        </v-col>
+
+                        <v-col cols="12" sm="6" class="box2">
+                            <h2 class="mb-3">Content 2</h2>
+                            <p>두 번째 영역</p>
+                        </v-col>
+                    </v-row>
+                </v-container>
+            </v-main>
+            <!-- Footer -->
+            <v-footer color="primary" dark>
+                <!-- 올해 년도를 자동으로 생성하여 저작권 표시문구 렌더링 -->
+                <div class="mx-auto">Copyright &copy; {{ new Date().getFullYear() }}</div>
+            </v-footer>
+        </v-app>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            vuetify: new Vuetify()
+        })
+    </script>
+</body>
+</html>

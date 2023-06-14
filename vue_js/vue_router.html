@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://unpkg.com/vue-router@3/dist/vue-router.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>안녕하세요!</h1>
+      <!--🟩 현재 라우터 위치의 컴포넌트 렌더링 -->
+
+      <p>
+        라우터 사용:
+        <!--🟩 to 속성에 이동할 링크를 지정 -->
+        <router-link to="/main">메인 페이지 이동</router-link>
+        <router-link to="/sub">서브 페이지 이동</router-link>
+      </p>
+      <hr />
+      <router-view></router-view>
+    </div>
+    <script>
+      // 🟩라우터에 컴포넌트를 정의
+      const tmMain = {
+        // 🟩 템플렛 안으로 하나의 페이지 전체 주소가 들어갈수있음🔻
+
+        template: "<h2>메인 페이지입니다.</h2>",
+      };
+      const tmSub = {
+        template: "<h2>서브 페이지입니다.</h2>",
+      };
+      // 🟩 이동할 주소명과 사용할 컴포넌트를 등록하여 라우터를 정의
+      const rtRouters = [
+        {
+          path: "/main",
+          component: tmMain,
+        },
+        {
+          path: "/sub",
+          component: tmSub,
+        },
+      ];
+
+      // 🟩  라우터 인스턴스를 생성하고 'router' 옵션을 전달
+      // 'router' 객체변수는 라우터 인스턴스이면서 Vue 생성시 옵션으로 사용되므로 변수 이름은 반드시 'router'사용
+      const router = new VueRouter({
+        routers: rtRouters,
+      });
+      // 🟩  뷰 루트 인스턴스를 만들고 router 옵션 추가
+      var app = new Vue({
+        el: "#app",
+        //❗❗❗❗❗ 반드시  const router = new VueRouter({}) 에서 작성한 이름 사용 ❗❗❗❗❗
+        router,
+      });
+    </script>
+  </body>
+</html>

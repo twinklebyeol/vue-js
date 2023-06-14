@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  </head>
+  <body>
+    <div id="main">
+      <p>클릭숫자 : {{nClicks}}</p>
+      <p>카운트다운:{{fnCounter}}</p>
+      <!-- 버튼을 누르면 fnlncrement 메서드 실행 -->
+      <button v-on:click="fnlncrement">👆click👆</button>
+    </div>
+    <script>
+      let app = new Vue({
+        el: "#main",
+
+        data: {
+          nClicks: 0,
+        },
+        methods: {
+          // 🔴 nClicks 값을 하나 증가시킴 / 이벤트가 필요한 것
+
+          fnlncrement: function () {
+            this.nClicks++;
+          },
+        },
+
+        //🔴 computed 는 mustache 안에  로직이 복잡할때 사용 /  계산식이 필요할때
+        computed: {
+          //🔴 originMsg의 데이터값을 모두 대문자로 변환하여 반환
+          //🔴 이때 data 의 값에 접근하기 위해 this 사용
+          fnCounter() {
+            return 100 - this.nClicks;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

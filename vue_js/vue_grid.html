@@ -1,0 +1,88 @@
+!
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;200;300;400;500;600;700&display=swap|Material+icons"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@7.2.96/css/materialdesignicons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css"
+    />
+    <title>Vuetify</title>
+    <style>
+      .box1 {
+        background: #9c0;
+      }
+      .box2 {
+        background: rgb(255, 68, 108);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 💚설명은 Vuetify_기초쌓기 읽어보기 -->
+    <div id="app">
+      <!-- 💚첫 화면의 시작은 v-app 엘리먼트 사용  ❗❗❗❗ v-app 에서만 뷰티파이가 작동함 ❗❗❗❗-->
+      <v-app>
+        <!-- 앱바를 이용하여 헤더 제목 작성 -->
+        <v-app-bar app flat color="primary">
+          <v-toolbar-title class="white--text mx-auto">
+            화면 크기에 따른 레이아웃 변경
+          </v-toolbar-title>
+        </v-app-bar>
+
+        <!--💚 콘텐츠 부분은 v-main 엘리먼트 사용 -->
+        <v-main>
+          <v-container>
+            <v-row>
+              <!-- 1️⃣ 열의 반응형 크기를 지정 -->
+              <!-- 1.xs 의 경우 : 12개의 열을 사용하여 한 행을 모두 차지 
+                   2.sm 의 경우 : 6개의 열을 사용하여 절반 너비를 차지 -->
+              <v-col cols="12" sm="8" class="box1">
+                <h2 class="mb-3">content 1</h2>
+                <p>첫번째 영역</p>
+              </v-col>
+              <!-- 2️⃣ 열의 반응형 크기를 지정 -->
+              <!-- 1.xs 의 경우 : 12개의 열을 사용하여 한 행을 모두 차지 
+                   2.sm 의 경우 : 6개의 열을 사용하여 절반 너비를 차지 -->
+              <v-col cols="12" sm="4" class="box2">
+                <h2 class="mb-3">content 2</h2>
+                <p>두번째 영역</p>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-main>
+
+        <!-- 💚하단 부분은 v-footer 엘리먼트 사용 -->
+        <!--💚 footer 색상을 secondary로 설정하고 fixed로 위치를 고정 시킴 -->
+        <!--🔻 dark는 다크모드 fixed는 스크롤이 움직여도 고정 시켜주는 역할 -->
+        <v-footer color="secondary" dark fixed>
+          <!--🔻 mx-auto는 블럭레벨 엘리먼트의 내용을 가운데 정렬시킴 -->
+          <div class="mx-auto">Copyright &copy;</div>
+        </v-footer>
+      </v-app>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        vuetify: new Vuetify(),
+      });
+    </script>
+  </body>
+</html>

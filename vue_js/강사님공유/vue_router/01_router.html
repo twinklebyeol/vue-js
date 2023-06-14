@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Router</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://unpkg.com/vue-router@3/dist/vue-router.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h2>Vue Router 사용하기</h2>
+        <p>
+            <router-link to="/main" index>메인 페이지로 이동</router-link>
+            <router-link to="/sub">서브 페이지로 이동</router-link>
+        </p>
+        <hr>
+        <router-view></router-view>
+    </div>
+
+    <script>
+        // 컴포넌트 생성
+        const tmMain = {
+            template: '<h2>메인 페이지입니다.</h2>'
+        }
+        const tmSub = {
+            template: '<h2>서브 페이지입니다.</h2>'
+        }
+
+        // 주소 & 컴포넌트 정의
+        const rtRoutes = [
+            {
+                path: '/',
+                component: tmMain
+            },
+            {
+                path: '/main',
+                component: tmMain
+            },
+            {
+                path: '/sub',
+                component: tmSub
+            },
+        ]
+
+        // 라우터 객체 생성
+        const router = new VueRouter({
+            routes: rtRoutes
+        })
+
+        new Vue({
+            el: '#app',
+            router
+        })
+    </script>
+</body>
+</html>

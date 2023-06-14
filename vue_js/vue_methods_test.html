@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  </head>
+  <body>
+    <div id="main">
+      <p>클릭 숫자: {{nClicks}}</p>
+      <p>카운트다운: {{fnCounter}}</p>
+      <!-- 버튼을 누르면 fnIncrement 메서드 실행 -->
+      <button v-on:click="fnIncrement">👆click👆</button>
+    </div>
+    <script>
+      let app = new Vue({
+        el: "#main",
+        data: {
+          nClicks: 0,
+        },
+        methods: {
+          fnIncrement: function () {
+            if (this.nClicks < 10) {
+              this.nClicks++;
+            }
+          },
+        },
+        computed: {
+          fnCounter() {
+            return 10 - this.nClicks;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

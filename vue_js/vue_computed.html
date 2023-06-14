@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  </head>
+  <body>
+    <div id="main">
+      <p>원본 : "{{originMsg}}"</p>
+      <p>대문자로 변환 : "{{upperCaseMsg}}"</p>
+    </div>
+    <script>
+      let app = new Vue({
+        el: "#main",
+        // 🔴data는 mustache 안에 전달할 값이 간단할 때 사용
+        data: {
+          originMsg: "Hello, Vue JS!",
+        },
+        //🔴 computed 는 mustache 안에 전달 할 값이 자바스크립트 로직 등 복잡할 때 사용
+        computed: {
+          //🔴 originMsg의 데이터값을 모두 대문자로 변환하여 반환
+          //🔴 이때 data 의 값에 접근하기 위해 this 사용
+          upperCaseMsg: function () {
+            return this.originMsg.toUpperCase();
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

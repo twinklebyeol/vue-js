@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vuex</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://unpkg.com/vuex@3"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h2>{{ sTitle }}</h2>
+      <com-counter msg="카운터1"></com-counter>
+      <com-counter msg="카운터2"></com-counter>
+    </div>
+    <script>
+      const store = new Vuex.Store({
+        state: {
+          count: 0,
+        },
+        mutations: {
+          fnIncData: (state) => state.count++, // Modified: Corrected mutation name
+          fnDecData: (state) => state.count--,
+        },
+        getters: {
+          fnGetData: (state) => state.count,
+        },
+        actions: {
+          async fnDecData({ commit }) {
+            const result = await api.fnDecrement();
+            if (result === true) {
+              commit("fnDecData");
+            }
+          },
+        },
+      });
+
+      const api = {
+        fnDecrement() {
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              resolve(true);
+            }, 500);
+          });
+        },
+      };
+
+      Vue.component("com-counter", {
+        props: ["msg"],
+        template: `
+          <div>
+            <h2>{{ msg }}</h2>
+            <p>카운터: {{ fnGetCount }}</p>
+            <p>
+              <button type="button" @click="fnIncCount">1 증가</button>
+              <button type="button" @click="fnDecCount">1 감소</button>
+            </p>
+          </div>`,
+        computed: {
+          fnGetCount() {
+            return store.getters.fnGetData; // Modified: Corrected getter name
+          },
+        },
+        methods: {
+          fnIncCount() {
+            store.commit("fnIncData"); // Modified: Corrected mutation name
+          },
+          fnDecCount() {
+            store.dispatch("fnDecData");
+          },
+        },
+      });
+
+      new Vue({
+        el: "#app",
+        data: {
+          sTitle: "Vuex 사용하기",
+        },
+        store,
+      });
+    </script>
+  </body>
+</html>

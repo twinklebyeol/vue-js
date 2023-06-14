@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;200;300;400;500;600;700&display=swap|Material+icons"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@7.2.96/css/materialdesignicons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css"
+    />
+    <title>Vuetify</title>
+    <style>
+      .border_style {
+        border: 1px solid tomato;
+        background: #9c0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 💚설명은 Vuetify_기초쌓기 읽어보기 -->
+    <div id="app">
+      <!-- 💚첫 화면의 시작은 v-app 엘리먼트 사용  ❗❗❗❗ v-app 에서만 뷰티파이가 작동함 ❗❗❗❗-->
+      <v-app>
+        <!--💚 상단 부분은 v-app-bar 엘리먼트 사용 -->
+
+        <!--💚 앱바 색상을 primary(블루)로 설정하고 fixed로 위치 고정 -->
+        <!--🔻 dark는 다크모드를 사용하면 자동적으로 텍스트를 어울리는 색상으로 바꿔줌 fixed는 스크롤이 움직여도 고정 시켜주는 역할 -->
+        <v-app-bar app color="primary" dark fixed>
+          <!--🔻 좌측에 메뉴 아이콘 넣음 -->
+          <v-app-bar-nav-icon></v-app-bar-nav-icon>
+          <v-toolbar-title>마스터 페이지</v-toolbar-title>
+          <!--🔻 우측에 추가메뉴 아이콘을 넣기 위해 v-spacer 엘리먼트 사용 -->
+          <v-spacer></v-spacer>
+          <v-btn icon>
+            <!--v-icon🔻 <button><img></button> 와 같은 개념 -->
+            <v-icon>mdi-flower-outline</v-icon>
+          </v-btn>
+        </v-app-bar>
+
+        <!--💚 콘텐츠 부분은 v-main 엘리먼트 사용 -->
+        <v-main>
+          <!-- ❗❗v-container은 section 처럼 사용가능❗❗ -->
+          <v-container>
+            <!--🔻 디스플레이-1/3 ✅디스플레이는 h1,h2,h3개념과 같음, ✅my-상하여백✅ body-1/2 타이포그래피 서체 종류와 크기로 설정 -->
+            <h1 class="display-1 my-">안녕하세요</h1>
+            <!--🔻 my-4로 상하 안쪽 여백 설정 -->
+            <p class="body-2 my-4">마스터 페이지 입니다.</p>
+            <v-divider></v-divider>
+            <h1 class="display-3 my-5">안녕하세요</h1>
+            <p class="body-1 my-4">마스터 페이지 입니다.</p>
+          </v-container>
+          <v-container>
+            <!-- 카드 ui 사용을 선언하는 v-card 엘리먼트 -->
+            <v-card class="mx-auto" max-width="344">
+              <!-- 카드 상단에 이미지 배치 -->
+              <v-img
+                src="images/edab29de95a7d797f5b1345b47011d5b.jpg"
+                aspect-ratio="2"
+              ></v-img>
+              <!-- 카드 중간에 텍스트 배치 -->
+              <v-card-text>
+                <div>
+                  <!-- 제목의 타이포그래피 스타일을 title 으로 설정 -->
+                  <!-- 하단의 margin을 2로 설정 -->
+                  <h2 class="title promary--text mb-5">나의 🌹을 받아줄래?</h2>
+                  <p class="'mb-0">
+                    ♥댕댕이♥댕댕이♥댕댕이♥댕댕이♥댕댕이♥댕댕이♥
+                  </p>
+                </div>
+              </v-card-text>
+              <!-- 카드 하단에 버튼 배치 -->
+              <v-card-actions>
+                <!-- 버튼 색상은 붉은색으로 설정 -->
+                <v-btn color="red white--text">하트를줄게</v-btn>
+                <!-- outline으로 버튼의 배경색 제거 -->
+                <v-btn outlined color="red">취소할꼬야</v-btn>
+                <v-btn color="#9C27B0" dark>또 취소할꼬야</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-container>
+          <v-container>
+            <!-- 한 행은 12개의 열이 기준 -->
+            <v-row class="text-center">
+              <v-col cols="12" class="border_style">xs12</v-col>
+              <v-col cols="6" class="border_style">xs6</v-col>
+              <v-col cols="3" class="border_style">xs3</v-col>
+              <!-- 현재 열의 개수가 9개인데 열 4개를 추가하면 12를 초과하므로 자동 줄바꿈 -->
+              <v-col cols="4" class="border_style">xs4</v-col>
+              <!-- 총 12개의 열을 추가. 8개 열을 채운 후 4개의 열은 자동으로 줄 바꿈 -->
+              <v-col
+                cols="1"
+                v-for="item in 12"
+                :key="item.id"
+                class="border_style"
+                >xs1</v-col
+              >
+            </v-row>
+
+            <!-- 총 20개의 생성. 열의 개수가 12개를 넘으면 자동으로 줄 바꿈 -->
+            <v-row class="text-center">
+              <v-col
+                cols="1"
+                v-for="item in 20"
+                :key="item.id"
+                class="border_style"
+                >xs1</v-col
+              >
+            </v-row>
+          </v-container>
+          <br />
+          <br />
+          <v-container fluid>
+            <v-row class="text-center">
+              <!-- sm>분기점 크기 이름 small : vuetify에서 확인하면 됨 약속 된 이름 -->
+              <v-col sm="4" class="border_style">sm4</v-col>
+              <!-- offset으로 그리드 사이에 4개의 열 간격을 띄움 -->
+              <v-col sm="4" offset-sm="4" class="border_style">4</v-col>
+            </v-row>
+          </v-container>
+        </v-main>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+
+        <!-- 💚하단 부분은 v-footer 엘리먼트 사용 -->
+        <!--💚 footer 색상을 secondary로 설정하고 fixed로 위치를 고정 시킴 -->
+        <!--🔻 dark는 다크모드 fixed는 스크롤이 움직여도 고정 시켜주는 역할 -->
+        <v-footer color="secondary" dark fixed>
+          <!--🔻 mx-auto는 블럭레벨 엘리먼트의 내용을 가운데 정렬시킴 -->
+          <div class="mx-auto">Copyright &copy;</div>
+        </v-footer>
+      </v-app>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        vuetify: new Vuetify(),
+      });
+    </script>
+  </body>
+</html>

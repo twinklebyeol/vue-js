@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap|Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css">
+</head>
+<body>
+    
+    <div id="app">
+        
+        <v-app>
+            <v-app-bar>
+                <v-icon>
+                    <span class="material-symbols-outlined">
+                        settings
+                        </span>
+                </v-icon>
+                <v-app-bar-nav-icon></v-app-bar-nav-icon>
+                <v-toobar-title>HEADER 입니다.</v-toobar-title>
+            </v-app-bar>
+
+            <v-main>
+                Hello~
+                <v-container>Content 입니다.</v-container>
+            </v-main>
+
+            <v-footer>
+                <div>Footer 입니다.</div>
+            </v-footer>
+        </v-app>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            vuetify: new Vuetify()
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Vuex</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://unpkg.com/vuex@3"></script>
+</head>
+<body>
+    <div id="app">
+        <h2>{{ sTitle }}</h2>
+        <com-counter msg="카운터 1"></com-counter>
+        <com-counter msg="카운터 2"></com-counter>
+    </div>
+
+    <script>
+        const store = new Vuex.Store({
+            // 상태값 정의
+            state: {
+                count: 0
+            },
+
+            // 데이터 변경
+            mutations: {
+                fnIncData: function(state){
+                    return state.count++
+                },
+                /* fnDncData: function(state){
+                    return state.count--
+                } */
+                /* fnDncData(state){
+                    return state.count--
+                } */
+                fnDncData: state => state.count--
+            },
+
+            // 상태값 반환
+            getters: {
+                fnGetData(state){
+                    return state.count
+                }
+            },
+
+            actions: {
+                async fnDecData({commit}, state){
+                    const result = await api.fnDecrement()
+                    if(result == true) commit('fnDecData')
+                }
+            }
+        });
+
+        const api = {
+            fnDecrement(){
+                return new Promise((resolve)=>{
+                    setTimeout(()=>{
+                        resolve(true)
+                    }, 1000)
+                })
+            }
+        }
+
+        Vue.component('com-counter', {
+            props: ['msg'],
+            template: `
+                <div>
+                    <h2>{{ msg }}</h2>
+                    <p>카운터 : {{ fnGetCount }}</p>
+                    <p>
+                        <button type="button" @click="fnIncCount">1 증가</button>
+                        <button type="button" @click="fnDecCount">1 감소</button>
+                    </p>
+                </div>
+            `,
+            computed: {
+                fnGetCount(){
+                    return store.getters.fnGetData
+                }
+            },
+            methods: {
+                fnIncCount(){
+                    store.commit('fnIncData')
+                },
+                fnDecCount(){
+                    store.dispatch('fnIncData')
+                }
+            }
+        })
+        
+        new Vue({
+            el: '#app',
+            data: {
+                sTitle: 'Vuex 사용하기'
+            },
+            store
+        })
+    </script>
+</body>
+</html>

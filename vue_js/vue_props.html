@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <style>
+      .fruit_style {
+        border: 3px solid teal;
+        padding-left: 10px;
+        margin-bottom: 10px;
+      }
+      ol {
+        padding-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <h1>{{sTitle}}</h1>
+      <!-- favorite-fruits 신규 엘리먼트 사용
+      fruits 배열의 값을 반복문으로 가져와 fruit 속성에 바인딩하여 컴포넌트에 전달
+      key 속성은 반드시 고유한 값으로 전달되어야 하므로 item의 id 값 대입 -->
+      <ol>
+        <favorite-fruits
+          v-for="item in fruits"
+          v-bind:fruit="item"
+          v-bind:key="item.fruit_name"
+        ></favorite-fruits>
+      </ol>
+    </div>
+    <script>
+      Vue.component("favorite-fruits", {
+        props: ["fruit"],
+        template: `
+          <li>{{ fruit.fruit_name }}</li>
+        `,
+      });
+
+      new Vue({
+        el: "#main",
+        data: {
+          sTitle: "좋아하는 과일",
+          fruits: [
+            { fruit_name: "사과", price: 1000 },
+            { fruit_name: "수박", price: 2000 },
+            { fruit_name: "복숭아", price: 3000 },
+          ],
+        },
+      });
+    </script>
+  </body>
+</html>

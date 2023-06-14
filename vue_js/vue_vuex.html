@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://unpkg.com/vuex@3"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>안녕하세요!</h1>
+      <com-counter msg="카운터1"></com-counter>
+      <com-counter msg="카운터2"></com-counter>
+    </div>
+    <script>
+      // 🔴  vuex 의 store 중앙에 actions-mutations-state-getters 을 정의함
+      //  🔴 store 란 저장소
+      const store = new Vuex.Store({
+        state: { count: 0 },
+        // mutations는 getters의 대칭되는 setters의 역할을 설정
+        mutations: {
+          fnIncData: function (state) {
+            state.count++;
+          },
+          fnDecData: function (state) {
+            state.count--;
+          },
+        },
+        getters: {
+          fnGetData(state) {
+            return state.count;
+          },
+        },
+        //🔴 상태값을 감소시키는 함수를 서버단에서 실행한다고 가정
+        // 🔴비동기 실행을 위해 async를 사용하고 매개변수로 commit  객체 전달
+        actions: {
+          async fnDecData({ commit }, state) {
+            // 🔴  가상으로 만든 원격 API 실행
+            const result = await api.fnDecrement();
+            //  🔴 원격 API 가 성공할 경우에 비로소 fnDecDate 함수 실행
+            if (result == true) commit("fnDecData");
+          },
+        },
+      });
+      //  🔴  타이머를 사용해 1초 후 True 값을 반환하도록 가상 원격 서버 API 정의
+      const api = {
+        fnDecrement() {
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              resolve(true);
+            }, 1000);
+          });
+        },
+      };
+
+      //🔴 com-counter 라는 신규 엘리먼트 등록
+      Vue.component("com-counter", {
+        props: ["msg"],
+        template: `
+    <div>
+      <h2>{{ msg }}</h2>
+      <p>카운터: {{ fnGetCount }}</p>
+      <button @click="fnIncCount">+1 증가</button>
+      <button @click="fnDecCount">-1 감소(원격API실행)</button>
+      <hr>
+    </div>
+  `,
+        computed: {
+          fnGetCount() {
+            //🔴 카운터값은 store에서 getters에 접근하여 값을 가져온 후 렌더링 함
+            return store.getters.fnGetData;
+          },
+        },
+        methods: {
+          //🔴 카운터 증가는 동기 실행을 가정하고 직접 store의 mutations에 접근하여 실행
+          fnIncCount() {
+            store.commit("fnIncData");
+          },
+          //🔴 카운터 감소는 원격 서버 API로 비동기 실행을 가정하고 actions에 접근하여 실행
+          fnDecCount() {
+            store.dispatch("fnDecData");
+          },
+        },
+      });
+
+      var app = new Vue({
+        el: "#app",
+        //🔴 store 사용을 선엄함
+        store,
+      });
+    </script>
+  </body>
+</html>
