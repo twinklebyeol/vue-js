@@ -2,7 +2,182 @@
 
 🟢라우터로 멀티 페이지 관리하는 SPA 만들기🟢
 
-🟡본격적인 실전 프로젝트 시작
+🟡 본격적인 실전 프로젝트 시작
 -뷰티파이에서 제공하는  vue-cli 템플릿
 -메인 페이지와 서브 페이지와 이동하는 라우터 기능 구현
 
+새로운 프로젝트 생성>cmd, 터미널로 생성하기
+
+Vue_project 안 cli 폴더 설명
+-node_modules
+-public : 거의 수정할게 없음 index.html  에서 title 정도?
+*html lang=""< 입력 안해놓으면 언어 선택창 계속 뜸* 언어선택 해주기
+-src : 실제 개발에 사용하는 폴더
+ -main.js 가 실제적인 vue.add 이랑 index.html 을 연결해주는 존재
+
+💥경로 제대로 쓰기!💥
+vue.2 에서는 <div id="app"></div> <최상위 루트는 무조건 한개만 가능!
+
+
+
+
+1.앱바, 메뉴 아이콘, 설정 아이콘 넣기
+2.라우터 및 장면 전환 효과
+
+3.메인페이지 만들기 
+component 폴더안에 > main_page.vue 만들기
+⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡
+<template>
+  <v-container>
+    <p class="display-1 my-4">메인 페이지 입니다.</p>
+    <v-divider></v-divider>
+    <p class="display-4 my-4">메인 페이지 입니다.</p>
+
+    <div class="text-center">
+      <!-- 버튼에서 fab, large 어트리뷰트를 사용해서 큰 원으로 설정 -->
+      <v-btn fab large class="mt-5" color="green" dark to="/sub">👈💥to를 입력해줘야 페이지 이동!!
+        <v-icon>mdi-arrow-right</v-icon>
+      </v-btn>
+    </div>
+  </v-container>
+  
+</template>
+<script></script>
+<style></style>
+⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡
+
+
+
+4.서브페이지 만들기
+component 폴더안에 > sub_page.vue 만들기
+⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡
+<template>
+  <v-container>
+    <p class="display-1 my-4">서브 페이지 입니다.</p>
+    <v-divider></v-divider>
+    <p class="display-4 my-4">서브 페이지 입니다.</p>
+
+    <div class="text-center">
+      <!-- 버튼에서 fab, large 어트리뷰트를 사용해서 큰 원으로 설정 -->
+      <v-btn fab large class="mt-5" color="red" dark to="/main">👈💥to를 입력해줘야 페이지 이동!!
+        <v-icon>mdi-replay</v-icon>
+      </v-btn>
+    </div>
+  </v-container>
+</template>
+<script></script>
+<style></style>
+⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡
+
+5. router  폴더 > index.js 안에 렌더링 시켜주기
+
+💥import mainPage from "../components/main_page";
+💥import subPage from "../components/sub_page";
+
+💥const routes = [
+  {
+    path: "/", 👈여기에 있는 "/"는 첫화면을 의미함!
+    name: "home",
+    component: mainPage,
+  },
+  {
+    path: "/main",
+    name: "main_page",
+    component: mainPage,
+  },
+  {
+    path: "/sub",
+    name: "sub_page",
+    component: subPage,
+  },
+];
+
+
+Vuex 로 상탯값 관리하는 SPA  만들기
+Vuex 로 상탯값 관리
+-뷰티파이로 디자인한 메인 페이지에서 입력한 내용을 Vuex.에 저장
+-그 값을 서브 페이지에서 전달 받아 처리
+
+⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡
+
+ <script>
+      // 🔴  vuex 의 store 중앙에 actions-mutations-state-getters 을 정의함
+      //  🔴 store 란 저장소
+      const store = new Vuex.Store({
+        state: { count: 0 },
+        // mutations는 getters의 대칭되는 setters의 역할을 설정
+        mutations: {
+          fnIncData: function (state) {
+            state.count++;
+          },
+          fnDecData: function (state) {
+            state.count--;
+          },
+        },
+        // 🔴바뀐값을 저장하거나 다른 컴포넌트한테 알려줄 준비하는 역할
+        getters: {
+          fnGetData(state) {
+            return state.count;
+          },
+        },
+        //🔴 상태값을 감소시키는 함수를 서버단에서 실행한다고 가정
+        // 🔴비동기 실행을 위해 async를 사용하고 매개변수로 commit  객체 전달
+        actions: {
+          async fnDecData({ commit }, state) {
+            // 🔴  가상으로 만든 원격 API 실행
+            const result = await api.fnDecrement();
+            //  🔴 원격 API 가 성공할 경우에 비로소 fnDecDate 함수 실행
+            if (result == true) commit("fnDecData");
+          },
+        },
+      });
+      //  🔴  타이머를 사용해 1초 후 True 값을 반환하도록 가상 원격 서버 API 정의
+      const api = {
+        fnDecrement() {
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              resolve(true);
+            }, 1000);
+          });
+        },
+      };
+
+      //🔴 com-counter 라는 신규 엘리먼트 등록
+      Vue.component("com-counter", {
+        props: ["msg"],
+        template: `
+    <div>
+      <h2>{{ msg }}</h2>
+      <p>카운터: {{ fnGetCount }}</p>
+      <button @click="fnIncCount">+1 증가</button>
+      <button @click="fnDecCount">-1 감소(원격API실행)</button>
+      <hr>
+    </div>
+  `,
+        computed: {
+          fnGetCount() {
+            //🔴 카운터값은 store에서 getters에 접근하여 값을 가져온 후 렌더링 함
+            return store.getters.fnGetData;
+          },
+        },
+        methods: {
+          //🔴 카운터 증가는 동기 실행을 가정하고 직접 store의 mutations에 접근하여 실행
+          fnIncCount() {
+            store.commit("fnIncData");
+          },
+          //🔴 카운터 감소는 원격 서버 API로 비동기 실행을 가정하고 actions에 접근하여 실행
+          fnDecCount() {
+            store.dispatch("fnDecData");
+          },
+        },
+      });
+
+      var app = new Vue({
+        el: "#app",
+        //🔴 store 사용을 선엄함
+        store,
+      });
+    </script>
+
+
+💥return의 중요성을 잘 인지하기!💥

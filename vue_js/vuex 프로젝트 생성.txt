@@ -1,0 +1,25 @@
+* 프로젝트 생성
+> vue create router-project
+
+Please pick a preset : [Manually select features]
+Check the features needed for your project : [Babel], [Router], [Vuex]  -- ** 중요 : router, vuex 반드시 선택 **
+Choose a version of Vue.js that you want to start the project width : [2.x]
+Where do you prefer placing config for Babel, ESLint, etc.? [In package.json] -- 모두 가능
+Save this as a preset for future projects? [N]
+
+
+
+* 디렉토리 이동
+> cd router-project
+
+
+
+* vuetify 설치
+> vue add vuetify
+
+
+
+* 프로젝트 실행
+> npm run serve
+
+입력 후 출력되는 주소를 alt 또는 ctrl 누르고 클릭
