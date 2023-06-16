@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- vuetify.js에 필요한 스타일 파일 링크 연결 -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&family=Roboto:wght@100;300;400;500;700;900&family=Vina+Sans&display=swap|Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.js"></script>
+    <!-- height/ 10vh: 화면을 100개로 쪼갰을 때 10개만큼의 높이(가변) -->
+
+    <!-- 리스트 제목, 아이콘 실습 -->
+    <title>리스트와 아이콘</title>
+    <style>
+      .btn-st {
+        top: 80px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <v-app>
+        <!-- vuetify 적용 범위 -->
+
+        <v-app-bar app color="orange" dark>
+          <!-- 메뉴 아이콘을 누르면 클릭기능 비활성화 -->
+          <v-app-bar-nav-icon
+            @click.stop="bDrawer = !bDrawer"
+          ></v-app-bar-nav-icon>
+          <v-toolbar-title>header입니다.</v-toolbar-title>
+        </v-app-bar>
+
+        <!-- bDrawer 가 True 이면 탐색 서랍 사용하도록 바인딩 -->
+
+        <v-navigation-drawer absolute temporary v-model="bDrawer">
+          <v-btn plain absolute right icon class="my-5">
+            <v-icon @click.stop="bDrawer = !bDrawer" large
+              >mdi-close-box</v-icon
+            >
+            <v-spacer></v-spacer>
+          </v-btn>
+
+          <v-container>
+            <v-list
+              two-line
+              v-for="items in nList"
+              @click=""
+              v-bind:key="items.id"
+            >
+              <v-list-item @click="" class="btn-st">
+                <v-list-item-content>
+                  <v-btn :class="items.btn_style">{{items.btn_name}}</v-btn>
+                </v-list-item-content></v-list-item
+              ></v-list
+            >
+          </v-container>
+        </v-navigation-drawer>
+
+        <v-main>
+          <v-container>
+            <v-card>
+              <!--v-for/ 각각을 구분할 수 있도록 key 꼭 써줘-->
+              <!-- 디렉티브 사이 띄어쓰기 가능(html불가능, vue가능) -->
+              <v-list
+                two-line
+                v-for="item in aList"
+                @click=""
+                v-bind:key="item.id"
+              >
+                <!-- <v-list two-line v-for="item in aList" v-bind:key="item.id"> -->
+                <!-- 항목을 하나씩 가져와서 item 단위로 표시 -->
+                <v-list-item @click="">
+                  <!-- 좌측에 대표 아이콘 먼저 표시 -->
+                  <v-list-item-avatar>
+                    <v-icon :class="item.icon_style"
+                      >{{ item.icon_name }}</v-icon
+                    >
+                  </v-list-item-avatar>
+
+                  <!-- 제목 렌더링 -->
+                  <v-list-item-content>
+                    <v-list-item-title
+                      class="font-weight-bold"
+                      :class="item.icon_title_style"
+                      >{{ item.title }}</v-list-item-title
+                    >
+                  </v-list-item-content>
+
+                  <!-- 우측에 화살표 아이콘 추가 -->
+                  <!-- action은 동작을 가지는 content 임 -->
+                  <v-list-item-action>
+                    <!-- 클릭할수있는 동작을 넣고싶으면 v-btn을 입력 -->
+                    <v-btn icon @click="updateMsg">
+                      <v-icon color="grey"
+                        >mdi-arrow-right-bold-circle-outline</v-icon
+                      >
+                    </v-btn>
+                  </v-list-item-action>
+                </v-list-item>
+              </v-list>
+            </v-card>
+          </v-container>
+
+          <v-card
+            height="100%"
+            class="d-flex display-2 align-center justify-center"
+            >선택 : {{sSelect}}</v-card
+          >
+        </v-main>
+        <!-- 하단 영역에 바닥 네비게이션 메뉴를 absolute로 고정! -->
+        <v-footer>
+          <!-- 선택된 메뉴는 sSelect 데이터를 연동시켜 바인딩  -->
+          <v-bottom-navigation fixed v-model="sSelect" dark>
+            <!-- 첫 번째 아이콘 버튼 -->
+            <v-btn color="green" text value="자전거">
+              자전거
+              <v-icon>mdi-bike</v-icon>
+            </v-btn>
+
+            <!-- 두 번째 아이콘 버튼 -->
+            <v-btn color="red" text value="지하철">
+              지하철
+              <v-icon>mdi-subway</v-icon>
+            </v-btn>
+
+            <!-- 세 번째 아이콘 버튼 -->
+            <v-btn color="blue" text value="버스">
+              버스
+              <v-icon>mdi-bus</v-icon>
+            </v-btn>
+          </v-bottom-navigation>
+        </v-footer>
+
+        <v-btn fab dark color="red" fixed bottom right>
+          <v-icon color="white--text" dark>mdi-alien</v-icon>
+        </v-btn>
+      </v-app>
+    </div>
+
+    <script>
+      new Vue({
+        el: "#app",
+        vuetify: new Vuetify(),
+        // data 가 함수형식이면 밑에  return 필수❗❗❗❗❗
+        data() {
+          return {
+            msg: "hello?",
+            nextMsg: "hi!!!!",
+            sSelect: "자전거",
+            bDrawer: false,
+            nList: [
+              {
+                id: 1,
+                btn_name: "원룸",
+                btn_style: "red white--text",
+              },
+              {
+                id: 2,
+                btn_name: "투룸",
+                btn_style: "green white--text",
+              },
+              {
+                id: 3,
+                btn_name: "오피스텔",
+                btn_style: "blue white--text",
+              },
+            ],
+            aList: [
+              {
+                id: 1,
+                icon_title_style: "brown--text",
+                title: "초코 쿠키",
+                icon_name: "mdi-cookie",
+                icon_style: "brown white--text",
+              },
+              {
+                id: 2,
+                icon_title_style: "pink--text",
+                title: "라즈베리 쿠키",
+                icon_name: "mdi-cookie",
+                icon_style: "pink white--text",
+              },
+              {
+                id: 3,
+                icon_title_style: "orange--text",
+                title: "치즈 쿠키",
+                icon_name: "mdi-cookie",
+                icon_style: "orange white--text",
+              },
+            ],
+          };
+        },
+        methods: {
+          handleItemClick(item) {
+            console.log("Clicked item:", item);
+          },
+          updateMsg() {
+            this.msg;
+            alert(this.msg);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;200;300;400;500;600;700&display=swap|Material+icons"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@7.2.96/css/materialdesignicons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css"
+    />
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"
+    ></script>
+    <style>
+      .btn-no-hover:hover {
+        background-color: transparent !important;
+        color: inherit !important;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <v-app>
+        <!-- 상단영역에 툴바 배치하고 좌측에 메뉴 아이콘 추가메뉴 -->
+        <v-app-bar app color="primary" dark>
+          <!-- 메뉴 아이콘을 누르면 클릭기능 비활성화 -->
+          <v-app-bar-nav-icon
+            @click.stop="bDrawer = !bDrawer"
+          ></v-app-bar-nav-icon>
+          <v-toolbar-title>header입니다.</v-toolbar-title>
+        </v-app-bar>
+
+        <!-- bDrawer 가 True 이면 탐색 서랍 사용하도록 바인딩 -->
+
+        <v-navigation-drawer absolute temporary v-model="bDrawer">
+          <v-btn plain absolute right icon class="my-5">
+            <v-icon @click.stop="bDrawer = !bDrawer" large
+              >mdi-close-box</v-icon
+            >
+            <v-spacer></v-spacer>
+          </v-btn>
+        </v-navigation-drawer>
+      </v-app>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        vuetify: new Vuetify(),
+        data: {
+          bDrawer: false,
+          //배열로 메뉴의 제목, 아이콘, 링크준비
+          meun_items: [],
+
+          // 버튼을 누르면 비활성화되도록 하는 토글 변수
+        },
+      });
+    </script>
+  </body>
+</html>
